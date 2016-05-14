@@ -12,7 +12,7 @@
     using OpenQA.Selenium.Firefox;
 
     using Xbehave;
-    
+
     public class SeleniumExtensions
     {
         private IWebDriver driver;
@@ -33,10 +33,18 @@
         {
             var pathToFile = Path.Combine(directoryPath, fileName);
 
-            "Given I used a web driver to go to a website"._(() => driver.Navigate().GoToUrl("http://www.thedailywtf.com"))
-                .Teardown(() => driver.Dispose());
+            "Given I used a web driver to go to a website"._(
+                () => driver.Navigate().GoToUrl("http://www.thedailywtf.com")).Teardown(() => driver.Dispose());
             $"When I call the SaveScreenShotAs in {pathToFile} extension method"._(
-                () => driver.SaveScreenshotAs(1000, new ImageTarget(directoryPath, fileName, ImageFormat.Bmp)));
+                () => driver.SaveScreenshotAs(1000, new ImageTarget(directoryPath, fileName, ImageFormat.Bmp)))
+                .Teardown(
+                    () =>
+                        {
+                            if (Directory.Exists(directoryPath))
+                            {
+                                Directory.Delete(directoryPath, true);
+                            }
+                        });
             "Then the screenshot should be saved"._(
                 () => File.Exists(pathToFile).Should().BeTrue("The screenshot needs to exist"));
         }
