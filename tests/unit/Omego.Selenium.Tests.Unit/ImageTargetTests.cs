@@ -2,5 +2,9 @@
 {
     public class ImageTargetTests
     {
+        private class ImageTargetTestData
+        {
+            
+        }
     }
 }
