@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{011EC2DD-B646-4C47-912E-B8397E28F579}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{69CB5762-4EB6-4411-B42B-3DF064B0C52F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration", "{8E8AFD02-3DF6-44A6-A85E-BFE91ACCF7FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{B29BDA9B-A6F7-4C26-8BB4-B9988DB19515}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{6EADA9F9-2C47-4A6A-B73F-E5A217FE96E3}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8E8AFD02-3DF6-44A6-A85E-BFE91ACCF7FE} = {69CB5762-4EB6-4411-B42B-3DF064B0C52F}
+		{B29BDA9B-A6F7-4C26-8BB4-B9988DB19515} = {69CB5762-4EB6-4411-B42B-3DF064B0C52F}
+	EndGlobalSection
+EndGlobal
