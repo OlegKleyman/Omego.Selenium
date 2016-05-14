@@ -34,7 +34,7 @@
             "Given I used a web driver to go to a website"._(() => driver.Navigate().GoToUrl("http://www.google.com"))
                 .Teardown(() => driver.Dispose());
             $"When I call the SaveScreenShotAs in {pathToFile} extension method"._(
-                () => driver.SaveScreenshotAs(directoryPath, fileName, ImageFormat.Png));
+                () => driver.SaveScreenshotAs(3000, new ImageTarget(directoryPath, fileName, ImageFormat.Png)));
             "Then the screenshot should be saved"._(
                 () => File.Exists(pathToFile).Should().BeTrue("The screenshot needs to exist"));
         }

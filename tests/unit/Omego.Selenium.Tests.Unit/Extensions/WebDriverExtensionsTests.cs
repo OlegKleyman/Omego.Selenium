@@ -6,6 +6,8 @@
 
     using FluentAssertions;
 
+    using NSubstitute;
+
     using Selenium.Extensions;
 
     using OpenQA.Selenium;
@@ -21,9 +23,22 @@
             MemberType = typeof(WebDriverExtensionsTestData))]
         public void SaveScreenshotAsShouldThrowArgumentNullExceptionWhenRequiredArgumentsAreNull(IWebDriver driver)
         {
-            Action saveScreenshotAs = () => driver.SaveScreenshotAs("", "", ImageFormat.Bmp);
+            Action saveScreenshotAs = () => driver.SaveScreenshotAs(1, new ImageTarget("", "", ImageFormat.Bmp));
 
             saveScreenshotAs.ShouldThrowExactly<ArgumentNullException>().And.ParamName.ShouldBeEquivalentTo("driver");
+        }
+
+        [Fact]
+        public void SaveScreenshotAsShouldThrowExceptionWhenTimeLimitIsReached()
+        {
+            var driver = Substitute.For<IMockWebDriver>();
+            driver.GetScreenshot().Returns(new Screenshot(""));
+
+            Action saveScreenshotAs = () => driver.SaveScreenshotAs(500, new ImageTarget("", "test.bmp", ImageFormat.Bmp));
+
+            saveScreenshotAs.ShouldThrow<TimeoutException>()
+                .Which.Message.Should()
+                .MatchRegex(@"Unable to get screenshot after trying for 50\dms.");
         }
 
         private class WebDriverExtensionsTestData
@@ -31,6 +46,10 @@
             public static IEnumerable<object[]>
                 SaveScreenshotAsShouldThrowArgumentNullExceptionWhenRequiredArgumentsAreNullCases
                 => new List<object[]> { new object[] { null } };
+        }
+
+        public interface IMockWebDriver : IWebDriver, ITakesScreenshot
+        {
         }
     }
 }
