@@ -13,12 +13,46 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{B29BDA9B-A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{6EADA9F9-2C47-4A6A-B73F-E5A217FE96E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omego.Selenium", "core\Omego.Selenium\Omego.Selenium.csproj", "{9C0C5929-DD78-4F9D-A0CB-0F9FEEF32479}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omego.Selenium.Example", "demo\Omego.Selenium.Example\Omego.Selenium.Example.csproj", "{0C27FE50-1FE4-4C4E-9B7D-FBE71B675672}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omego.Selenium.Tests.Integration", "tests\integration\Omego.Selenium.Tests.Integration\Omego.Selenium.Tests.Integration.csproj", "{5388D996-C91F-4AAC-A91E-A1624C3624FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omego.Selenium.Tests.Unit", "tests\unit\Omego.Selenium.Tests.Unit\Omego.Selenium.Tests.Unit.csproj", "{540B35DD-36DA-4DC8-9356-56E7B3DD58E5}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C0C5929-DD78-4F9D-A0CB-0F9FEEF32479}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0C5929-DD78-4F9D-A0CB-0F9FEEF32479}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C0C5929-DD78-4F9D-A0CB-0F9FEEF32479}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0C5929-DD78-4F9D-A0CB-0F9FEEF32479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C27FE50-1FE4-4C4E-9B7D-FBE71B675672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C27FE50-1FE4-4C4E-9B7D-FBE71B675672}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C27FE50-1FE4-4C4E-9B7D-FBE71B675672}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C27FE50-1FE4-4C4E-9B7D-FBE71B675672}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5388D996-C91F-4AAC-A91E-A1624C3624FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5388D996-C91F-4AAC-A91E-A1624C3624FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5388D996-C91F-4AAC-A91E-A1624C3624FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5388D996-C91F-4AAC-A91E-A1624C3624FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{540B35DD-36DA-4DC8-9356-56E7B3DD58E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{540B35DD-36DA-4DC8-9356-56E7B3DD58E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{540B35DD-36DA-4DC8-9356-56E7B3DD58E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{540B35DD-36DA-4DC8-9356-56E7B3DD58E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8E8AFD02-3DF6-44A6-A85E-BFE91ACCF7FE} = {69CB5762-4EB6-4411-B42B-3DF064B0C52F}
 		{B29BDA9B-A6F7-4C26-8BB4-B9988DB19515} = {69CB5762-4EB6-4411-B42B-3DF064B0C52F}
+		{9C0C5929-DD78-4F9D-A0CB-0F9FEEF32479} = {011EC2DD-B646-4C47-912E-B8397E28F579}
+		{0C27FE50-1FE4-4C4E-9B7D-FBE71B675672} = {6EADA9F9-2C47-4A6A-B73F-E5A217FE96E3}
+		{5388D996-C91F-4AAC-A91E-A1624C3624FA} = {8E8AFD02-3DF6-44A6-A85E-BFE91ACCF7FE}
+		{540B35DD-36DA-4DC8-9356-56E7B3DD58E5} = {B29BDA9B-A6F7-4C26-8BB4-B9988DB19515}
 	EndGlobalSection
 EndGlobal
