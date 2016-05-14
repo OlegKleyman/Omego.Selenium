@@ -1,11 +1,12 @@
 ﻿namespace Omego.Selenium.Tests.Unit.Extensions
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing.Imaging;
 
     using FluentAssertions;
 
-    using Omego.Selenium.Extensions;
+    using Selenium.Extensions;
 
     using OpenQA.Selenium;
 
@@ -13,12 +14,23 @@
 
     public class WebDriverExtensionsTests
     {
-        [Fact]
-        public void SaveScreenshotAsShouldThrowArgumentNullExceptionWhenRequiredArgumentsAreNull()
+        [CLSCompliant(false)]
+        [Theory]
+        [MemberData(
+                nameof(WebDriverExtensionsTestData.SaveScreenshotAsShouldThrowArgumentNullExceptionWhenRequiredArgumentsAreNullCases), null,
+            MemberType = typeof(WebDriverExtensionsTestData))]
+        public void SaveScreenshotAsShouldThrowArgumentNullExceptionWhenRequiredArgumentsAreNull(IWebDriver driver)
         {
-            Action saveScreenshotAs = () => ((IWebDriver)null).SaveScreenshotAs("", "", ImageFormat.Bmp);
+            Action saveScreenshotAs = () => driver.SaveScreenshotAs("", "", ImageFormat.Bmp);
 
             saveScreenshotAs.ShouldThrowExactly<ArgumentNullException>().And.ParamName.ShouldBeEquivalentTo("driver");
+        }
+
+        private class WebDriverExtensionsTestData
+        {
+            public static IEnumerable<object[]>
+                SaveScreenshotAsShouldThrowArgumentNullExceptionWhenRequiredArgumentsAreNullCases
+                => new List<object[]> { new object[] { null } };
         }
     }
 }
