@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
     using System.Drawing.Imaging;
+    using System.IO;
 
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.Extensions;
@@ -33,6 +34,13 @@
                 throw new TimeoutException(
                     $"Unable to get screenshot after trying for {stopWatch.ElapsedMilliseconds}ms.");
             }
+
+            if (!Directory.Exists(target.Directory))
+            {
+                Directory.CreateDirectory(target.Directory);
+            }
+
+            screenshot.SaveAsFile(target.CombinedPath, target.Format);
         }
     }
 }
