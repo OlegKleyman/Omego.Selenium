@@ -23,7 +23,7 @@
             MemberType = typeof(WebDriverExtensionsTestData))]
         public void SaveScreenshotAsShouldThrowArgumentNullExceptionWhenRequiredArgumentsAreNull(IWebDriver driver)
         {
-            Action saveScreenshotAs = () => driver.SaveScreenshotAs(1, new ImageTarget("", "", ImageFormat.Bmp));
+            Action saveScreenshotAs = () => driver.SaveScreenshotAs(1, new ImageTarget("", "file", ImageFormat.Bmp));
 
             saveScreenshotAs.ShouldThrowExactly<ArgumentNullException>().And.ParamName.ShouldBeEquivalentTo("driver");
         }
