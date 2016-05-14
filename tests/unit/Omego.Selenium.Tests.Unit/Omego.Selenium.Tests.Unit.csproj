@@ -71,7 +71,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Omego.Selenium\Omego.Selenium.csproj">
+      <Project>{9C0C5929-DD78-4F9D-A0CB-0F9FEEF32479}</Project>
+      <Name>Omego.Selenium</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
