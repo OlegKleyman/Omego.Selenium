@@ -24,7 +24,7 @@
                 .Teardown(() => this.driver.Dispose());
         }
 
-        [Scenario(Skip = "Needs implementation")]
+        [Scenario]
         [Example(@".\screenshots", "screen.png")]
         [CLSCompliant(false)]
         public void TakeScreenShot(string directoryPath, string fileName)
