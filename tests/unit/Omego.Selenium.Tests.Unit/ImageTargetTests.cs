@@ -12,8 +12,8 @@
     {
         [CLSCompliant(false)]
         [Theory]
-        [MemberData(nameof(ImageTargetTestData.ConstructorShouldThrowArgumentExceptionWhenArgumentsAreInvalidCases), null,
-            MemberType = typeof(ImageTargetTestData))]
+        [MemberData(nameof(ImageTargetTestData.ConstructorShouldThrowArgumentExceptionWhenArgumentsAreInvalidCases),
+            null, MemberType = typeof(ImageTargetTestData))]
         public void ConstructorShouldThrowArgumentExceptionWhenArgumentsAreInvalid(
             string directory,
             string fileName,
@@ -46,6 +46,19 @@
             target.Format.ShouldBeEquivalentTo(imageFormat);
         }
 
+        [Fact]
+        public void CombinedPathShouldReturnTheCombinedPath()
+        {
+            var target = GetImageTarget();
+
+            target.CombinedPath.ShouldBeEquivalentTo(@"foo\bar\baz.bmp");
+        }
+
+        private static ImageTarget GetImageTarget()
+        {
+            return new ImageTarget(@"foo\bar", "baz.bmp", default(ImageFormat));
+        }
+
         private class ImageTargetTestData
         {
             public static IEnumerable<object[]> ConstructorShouldThrowArgumentExceptionWhenArgumentsAreInvalidCases
@@ -69,12 +82,14 @@
                                 },
                             new object[]
                                 {
-                                    @"\", "test.bmp", @"Directory ""\"" contains invalid characters.\r\nParameter name: directory",
+                                    "<", "test.bmp",
+                                    "Directory \"<\" contains invalid characters.\r\nParameter name: directory",
                                     "directory", typeof(ArgumentException)
                                 },
                             new object[]
                                 {
-                                    "", @"\", @"File name ""\"" contains invalid characters.\r\nParameter name: fileName",
+                                    "", @"\",
+                                    @"File name ""\"" contains invalid characters.\r\nParameter name: fileName",
                                     "fileName", typeof(ArgumentException)
                                 }
                         };
