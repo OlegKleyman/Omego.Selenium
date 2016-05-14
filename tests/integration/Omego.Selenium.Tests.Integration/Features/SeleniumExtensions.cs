@@ -22,6 +22,8 @@
         {
             "Given I have an IWebDriver object"._(() => driver = new FirefoxDriver())
                 .Teardown(() => this.driver.Dispose());
+
+            "And it's full screen"._(() => this.driver.Manage().Window.Maximize());
         }
 
         [Scenario]
@@ -31,10 +33,10 @@
         {
             var pathToFile = Path.Combine(directoryPath, fileName);
 
-            "Given I used a web driver to go to a website"._(() => driver.Navigate().GoToUrl("http://www.wwe.com"))
+            "Given I used a web driver to go to a website"._(() => driver.Navigate().GoToUrl("http://www.thedailywtf.com"))
                 .Teardown(() => driver.Dispose());
             $"When I call the SaveScreenShotAs in {pathToFile} extension method"._(
-                () => driver.SaveScreenshotAs(3000, new ImageTarget(directoryPath, fileName, ImageFormat.Bmp)));
+                () => driver.SaveScreenshotAs(1000, new ImageTarget(directoryPath, fileName, ImageFormat.Bmp)));
             "Then the screenshot should be saved"._(
                 () => File.Exists(pathToFile).Should().BeTrue("The screenshot needs to exist"));
         }
