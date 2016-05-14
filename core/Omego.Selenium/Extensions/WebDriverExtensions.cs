@@ -22,11 +22,11 @@
             {
                 screenshot = driver.TakeScreenshot();
             }
-            while (stopWatch.ElapsedMilliseconds < timeLimit && screenshot.AsByteArray.Length == 0);
+            while (stopWatch.ElapsedMilliseconds < timeLimit && screenshot?.AsByteArray?.Length == 0);
 
             stopWatch.Stop();
 
-            if (screenshot.AsByteArray.Length == 0)
+            if (screenshot?.AsByteArray?.Length == 0)
             {
                 throw new TimeoutException(
                     $"Unable to get screenshot after trying for {stopWatch.ElapsedMilliseconds}ms.");
