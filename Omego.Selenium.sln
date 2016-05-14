@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{011EC2DD-B646-4C47-912E-B8397E28F579}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{011EC2DD-B646-4C47-912E-B8397E28F579}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{69CB5762-4EB6-4411-B42B-3DF064B0C52F}"
 EndProject
