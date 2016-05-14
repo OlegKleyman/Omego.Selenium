@@ -1,6 +1,7 @@
 namespace Omego.Selenium
 {
     using System;
+    using System.Drawing.Imaging;
     using System.IO;
 
     public class ImageTarget
@@ -8,7 +9,9 @@ namespace Omego.Selenium
         public string Directory { get; }
         public string FileName { get; }
 
-        public ImageTarget(string directory, string fileName)
+        public ImageFormat Format { get; set; }
+
+        public ImageTarget(string directory, string fileName, ImageFormat format)
         {
             if (directory == null) throw new ArgumentNullException(nameof(directory));
             if (fileName == null) throw new ArgumentNullException(nameof(fileName));
@@ -28,6 +31,7 @@ namespace Omego.Selenium
 
             Directory = directory;
             FileName = fileName;
+            Format = format;
         }
     }
 }

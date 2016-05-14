@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing.Imaging;
 
     using FluentAssertions;
 
@@ -20,7 +21,7 @@
             string expectedParameterName,
             Type expectedException)
         {
-            Action constructor = () => new ImageTarget(directory, fileName);
+            Action constructor = () => new ImageTarget(directory, fileName, default(ImageFormat));
 
             constructor.ShouldThrow<ArgumentException>()
                 .WithMessage(expectedMessage)
@@ -29,6 +30,20 @@
                     "the parameter name should be of the problematic parameter")
                 .And.Should()
                 .BeOfType(expectedException);
+        }
+
+        [Fact]
+        public void ConstructorShouldConstructObject()
+        {
+            var directoryName = "test";
+            var fileName = "test.bmp";
+            var imageFormat = ImageFormat.Gif;
+
+            var target = new ImageTarget(directoryName, fileName, imageFormat);
+
+            target.Directory.ShouldBeEquivalentTo(directoryName);
+            target.FileName.ShouldBeEquivalentTo(fileName);
+            target.Format.ShouldBeEquivalentTo(imageFormat);
         }
 
         private class ImageTargetTestData
