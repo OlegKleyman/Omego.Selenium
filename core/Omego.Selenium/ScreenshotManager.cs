@@ -44,19 +44,20 @@
             stopWatch.Start();
 
             Screenshot screenshot;
-
             const int invalidScreenshotLength = 0;
+
+            Func<Screenshot, bool> isNotRetrieved =
+                (screen) => (screen == null) || (screen.AsByteArray.Length == invalidScreenshotLength);
 
             do
             {
                 screenshot = driver.TakeScreenshot();
             }
-            while (stopWatch.ElapsedMilliseconds < timeLimit
-                   && ((screenshot == null) || (screenshot.AsByteArray.Length == invalidScreenshotLength)));
+            while (stopWatch.ElapsedMilliseconds < timeLimit && (isNotRetrieved(screenshot)));
 
             stopWatch.Stop();
 
-            if (screenshot == null || screenshot.AsByteArray.Length == invalidScreenshotLength)
+            if (isNotRetrieved(screenshot))
             {
                 throw new TimeoutException(
                     $"Unable to get screenshot after trying for {stopWatch.ElapsedMilliseconds}ms.");
