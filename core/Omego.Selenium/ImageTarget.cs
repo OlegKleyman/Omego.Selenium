@@ -5,16 +5,16 @@ namespace Omego.Selenium
     using System.IO;
 
     /// <summary>
-    /// Represents image targets information.
+    ///     Represents image targets information.
     /// </summary>
     public class ImageTarget
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ImageTarget"/> class.
+        ///     Initializes a new instance of the <see cref="ImageTarget" /> class.
         /// </summary>
         /// <param name="directory">The directory to create in.</param>
         /// <param name="fileName">The file name of the image.</param>
-        /// <param name="format">The <see cref="ImageFormat"/>.</param>
+        /// <param name="format">The <see cref="ImageFormat" />.</param>
         public ImageTarget(string directory, string fileName, ImageFormat format)
         {
             if (directory == null) throw new ArgumentNullException(nameof(directory));
@@ -39,25 +39,25 @@ namespace Omego.Selenium
         }
 
         /// <summary>
-        /// Gets <see cref="Directory"/>.
+        ///     Gets <see cref="Directory" />.
         /// </summary>
         /// <value>Gets the directory of the image.</value>
         public string Directory { get; }
 
         /// <summary>
-        /// Gets <see cref="FileName"/>.
+        ///     Gets <see cref="FileName" />.
         /// </summary>
         /// <value>Gets the file name of the image.</value>
         public string FileName { get; }
 
         /// <summary>
-        /// Gets <see cref="Format"/>.
+        ///     Gets <see cref="Format" />.
         /// </summary>
         /// <value>Gets or sets the format of the image.</value>
         public ImageFormat Format { get; set; }
 
         /// <summary>
-        /// Gets <see cref="CombinedPath"/>
+        ///     Gets <see cref="CombinedPath" />
         /// </summary>
         /// <value>Gets the combined directory and file name path,</value>
         public string CombinedPath => Path.Combine(Directory, FileName);
