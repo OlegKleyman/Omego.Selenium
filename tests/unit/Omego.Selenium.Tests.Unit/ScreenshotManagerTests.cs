@@ -81,7 +81,7 @@
         {
         }
 
-        public static class ScreenshotManagerTestData
+        private static class ScreenshotManagerTestData
         {
             public static IEnumerable<object[]> SaveScreenshotAsShouldThrowExceptionWhenTimeLimitIsReachedCases
                 => new List<object[]> { new object[] { new Screenshot(String.Empty) }, new object[] { (Screenshot)null } };
