@@ -45,9 +45,11 @@
             var fileSystem = new MockFileSystem();
             var imageTarget = new ImageTarget("test", "test.bmp", ImageFormat.Bmp);
 
-            screenshot.SaveTo(fileSystem, imageTarget);
+            var result = screenshot.SaveTo(fileSystem, imageTarget);
 
-            fileSystem.File.Exists(imageTarget.CombinedPath).Should().BeTrue();
+            result.Should().NotBeNull();
+            result.Exists.ShouldBeEquivalentTo(true);
+            result.FullName.ShouldBeEquivalentTo(imageTarget.CombinedPath);
         }
 
         [Fact]
