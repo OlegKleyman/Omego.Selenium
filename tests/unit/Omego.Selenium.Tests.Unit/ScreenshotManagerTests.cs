@@ -49,6 +49,28 @@
                 .MatchRegex(@"Unable to get screenshot after trying for 50\dms.");
         }
 
+        [CLSCompliant(false)]
+        [Theory]
+        [MemberData(
+            nameof(ScreenshotManagerTestData.ConstructorShouldThrowArgumentExceptionWhenRequiredArgumentsNotValidCases),
+            null, MemberType = typeof(ScreenshotManagerTestData))]
+        public void ConstructorShouldThrowArgumentExceptionWhenRequiredArgumentsNotValid(
+            IWebDriver driver,
+            string expectedParameterName,
+            string expectedMessage,
+            Type expectedException)
+        {
+            Action constructor = () => new ScreenshotManager(null);
+
+            constructor.ShouldThrow<ArgumentException>()
+                .WithMessage(expectedMessage)
+                .Where(
+                    exception => exception.ParamName == expectedParameterName,
+                    "the parameter name should be of the problematic parameter")
+                .And.Should()
+                .BeOfType(expectedException);
+        }
+
         private IScreenshotManager GetScreenshotManager(IWebDriver driver)
         {
             return new ScreenshotManager(driver);
@@ -65,8 +87,16 @@
                 => new List<object[]> { new object[] { new Screenshot(String.Empty) }, new object[] { (Screenshot)null } };
 
             public static IEnumerable<object[]>
-                SaveScreenshotAsShouldThrowArgumentNullExceptionWhenRequiredArgumentsAreNullCases
-                => new List<object[]> { new object[] { null } };
+                ConstructorShouldThrowArgumentExceptionWhenRequiredArgumentsNotValidCases
+                =>
+                    new List<object[]>
+                        {
+                            new object[]
+                                {
+                                    null, "driver", "Value cannot be null.\r\nParameter name: driver",
+                                    typeof(ArgumentNullException)
+                                }
+                        };
         }
     }
 }

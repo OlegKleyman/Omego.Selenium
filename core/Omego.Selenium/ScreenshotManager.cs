@@ -12,6 +12,8 @@
 
         public ScreenshotManager(IWebDriver driver)
         {
+            if (driver == null) throw new ArgumentNullException(nameof(driver));
+
             this.driver = driver;
         }
 
