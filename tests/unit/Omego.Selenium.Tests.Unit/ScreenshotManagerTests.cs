@@ -28,7 +28,7 @@
 
             getScreenshot.ShouldThrow<TimeoutException>()
                 .Which.Message.Should()
-                .MatchRegex(@"Unable to get screenshot after trying for 50\dms.");
+                .MatchRegex(@"Unable to get screenshot after trying for 5\d\dms.");
         }
 
         [CLSCompliant(false)]
