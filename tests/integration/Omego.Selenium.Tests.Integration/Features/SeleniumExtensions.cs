@@ -3,10 +3,9 @@
     using System;
     using System.Drawing.Imaging;
     using System.IO;
+    using System.IO.Abstractions;
 
     using FluentAssertions;
-
-    using Extensions;
 
     using OpenQA.Selenium;
     using OpenQA.Selenium.Firefox;
@@ -21,7 +20,7 @@
         public void Background()
         {
             "Given I have an IWebDriver object"._(() => driver = new FirefoxDriver())
-                .Teardown(() => this.driver.Dispose());
+                .Teardown(() => driver.Dispose());
 
             "And it's full screen"._(() => this.driver.Manage().Window.Maximize());
         }
@@ -34,17 +33,18 @@
             var pathToFile = Path.Combine(directoryPath, fileName);
 
             "Given I used a web driver to go to a website"._(
-                () => driver.Navigate().GoToUrl("http://www.thedailywtf.com")).Teardown(() => driver.Dispose());
-            $"When I call the SaveScreenShotAs in {pathToFile} extension method"._(
-                () => driver.SaveScreenshotAs(1000, new ImageTarget(directoryPath, fileName, ImageFormat.Bmp)))
-                .Teardown(
-                    () =>
-                        {
-                            if (Directory.Exists(directoryPath))
+                () => driver.Navigate().GoToUrl("http://www.thedailywtf.com"));
+            $"When I call the SaveTo WebScreenshot method"._(
+                () =>
+                new ScreenshotManager(driver).GetScreenshot(5000)
+                    .SaveTo(new FileSystem(), new ImageTarget(directoryPath, fileName, ImageFormat.Bmp))).Teardown(
+                        () =>
                             {
-                                Directory.Delete(directoryPath, true);
-                            }
-                        });
+                                if (Directory.Exists(directoryPath))
+                                {
+                                    Directory.Delete(directoryPath, true);
+                                }
+                            });
             "Then the screenshot should be saved"._(
                 () => File.Exists(pathToFile).Should().BeTrue("The screenshot needs to exist"));
         }

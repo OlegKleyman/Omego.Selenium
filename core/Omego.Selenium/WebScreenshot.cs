@@ -29,8 +29,16 @@ namespace Omego.Selenium
             using (var imageStream = new MemoryStream(screenshot.AsByteArray))
             {
                 var screenshotImage = Image.FromStream(imageStream);
-                
-                screenshotImage.Save(fileSystem.File.Create(target.CombinedPath), target.Format);
+
+                if (!fileSystem.Directory.Exists(target.Directory))
+                {
+                    fileSystem.Directory.CreateDirectory(target.Directory);
+                }
+
+                using (var file = fileSystem.File.Create(target.CombinedPath))
+                {
+                    screenshotImage.Save(file, target.Format);
+                }
             }
 
             return fileSystem.FileInfo.FromFileName(target.CombinedPath);
