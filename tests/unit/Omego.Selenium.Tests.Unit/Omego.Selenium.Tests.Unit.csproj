@@ -77,7 +77,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
     <Compile Include="ImageTargetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenshotManagerTests.cs" />
