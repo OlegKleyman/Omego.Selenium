@@ -23,6 +23,9 @@ namespace Omego.Selenium
         [CLSCompliant(false)]
         public FileInfoBase SaveTo(IFileSystem fileSystem, ImageTarget target)
         {
+            if (fileSystem == null) throw new ArgumentNullException(nameof(fileSystem));
+            if (target == null) throw new ArgumentNullException(nameof(target));
+
             using (var imageStream = new MemoryStream(screenshot.AsByteArray))
             {
                 var screenshotImage = Image.FromStream(imageStream);
