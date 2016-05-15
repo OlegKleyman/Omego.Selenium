@@ -36,30 +36,6 @@
                 .BeOfType(expectedException);
         }
 
-        [Fact]
-        public void SaveToShouldSaveToTheFileSystem()
-        {
-            var screenshot = GetWebScreenshot("iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAIAAADAusJtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8Y"
-                                              + "QUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAAQSURBVBhXY/j//z8C//8PAF+wC/WcqJPUAAAAAElFTkSuQmCC");
-
-            var fileSystem = new MockFileSystem();
-            var imageTarget = new ImageTarget("test", "test.bmp", ImageFormat.Bmp);
-
-            var result = screenshot.SaveTo(fileSystem, imageTarget);
-
-            result.Should().NotBeNull();
-            result.Exists.ShouldBeEquivalentTo(true);
-            result.FullName.ShouldBeEquivalentTo(imageTarget.CombinedPath);
-        }
-
-        [Fact]
-        public void AsByteArrayShouldReturnTheSerializedImageArray()
-        {
-            var screenshot = GetWebScreenshot("test");
-
-            screenshot.AsByteArray.ShouldBeEquivalentTo(new byte[] { 181, 235, 45 });
-        }
-
         [CLSCompliant(false)]
         [Theory]
         [MemberData(nameof(WebScreenshotTestData.SaveToShouldThrowArgumentExceptionWhenArgumentsAreInvalidCases),
@@ -88,7 +64,7 @@
         {
             return new WebScreenshot(new Screenshot(base64EncodedScreenshot));
         }
-        
+
         public static class WebScreenshotTestData
         {
             public static IEnumerable<object[]> SaveToShouldThrowArgumentExceptionWhenArgumentsAreInvalidCases
@@ -115,10 +91,37 @@
                         {
                             new object[]
                                 {
-                                    null, "screenshot", "Value cannot be null.\r\nParameter name: screenshot",
+                                    null, "screenshot",
+                                    "Value cannot be null.\r\nParameter name: screenshot",
                                     typeof(ArgumentNullException)
                                 }
                         };
+        }
+
+        [Fact]
+        public void AsByteArrayShouldReturnTheSerializedImageArray()
+        {
+            var screenshot = GetWebScreenshot("test");
+
+            screenshot.AsByteArray.ShouldBeEquivalentTo(new byte[] { 181, 235, 45 });
+        }
+
+        [Fact]
+        public void SaveToShouldSaveToTheFileSystem()
+        {
+            var screenshot =
+                GetWebScreenshot(
+                    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAIAAADAusJtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8Y"
+                    + "QUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAAQSURBVBhXY/j//z8C//8PAF+wC/WcqJPUAAAAAElFTkSuQmCC");
+
+            var fileSystem = new MockFileSystem();
+            var imageTarget = new ImageTarget("test", "test.bmp", ImageFormat.Bmp);
+
+            var result = screenshot.SaveTo(fileSystem, imageTarget);
+
+            result.Should().NotBeNull();
+            result.Exists.ShouldBeEquivalentTo(true);
+            result.FullName.ShouldBeEquivalentTo(imageTarget.CombinedPath);
         }
     }
 }

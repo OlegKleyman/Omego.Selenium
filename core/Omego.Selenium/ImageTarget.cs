@@ -6,14 +6,6 @@ namespace Omego.Selenium
 
     public class ImageTarget
     {
-        public string Directory { get; }
-
-        public string FileName { get; }
-
-        public ImageFormat Format { get; set; }
-
-        public string CombinedPath => Path.Combine(Directory, FileName);
-
         public ImageTarget(string directory, string fileName, ImageFormat format)
         {
             if (directory == null) throw new ArgumentNullException(nameof(directory));
@@ -36,5 +28,13 @@ namespace Omego.Selenium
             FileName = fileName;
             Format = format;
         }
+
+        public string Directory { get; }
+
+        public string FileName { get; }
+
+        public ImageFormat Format { get; set; }
+
+        public string CombinedPath => Path.Combine(Directory, FileName);
     }
 }

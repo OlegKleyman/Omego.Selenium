@@ -32,28 +32,6 @@
                 .BeOfType(expectedException);
         }
 
-        [Fact]
-        public void ConstructorShouldConstructObject()
-        {
-            var directoryName = "test";
-            var fileName = "test.bmp";
-            var imageFormat = ImageFormat.Gif;
-
-            var target = new ImageTarget(directoryName, fileName, imageFormat);
-
-            target.Directory.ShouldBeEquivalentTo(directoryName);
-            target.FileName.ShouldBeEquivalentTo(fileName);
-            target.Format.ShouldBeEquivalentTo(imageFormat);
-        }
-
-        [Fact]
-        public void CombinedPathShouldReturnTheCombinedPath()
-        {
-            var target = GetImageTarget();
-
-            target.CombinedPath.ShouldBeEquivalentTo(@"foo\bar\baz.bmp");
-        }
-
         private static ImageTarget GetImageTarget()
         {
             return new ImageTarget(@"foo\bar", "baz.bmp", default(ImageFormat));
@@ -93,6 +71,28 @@
                                     "fileName", typeof(ArgumentException)
                                 }
                         };
+        }
+
+        [Fact]
+        public void CombinedPathShouldReturnTheCombinedPath()
+        {
+            var target = GetImageTarget();
+
+            target.CombinedPath.ShouldBeEquivalentTo(@"foo\bar\baz.bmp");
+        }
+
+        [Fact]
+        public void ConstructorShouldConstructObject()
+        {
+            var directoryName = "test";
+            var fileName = "test.bmp";
+            var imageFormat = ImageFormat.Gif;
+
+            var target = new ImageTarget(directoryName, fileName, imageFormat);
+
+            target.Directory.ShouldBeEquivalentTo(directoryName);
+            target.FileName.ShouldBeEquivalentTo(fileName);
+            target.Format.ShouldBeEquivalentTo(imageFormat);
         }
     }
 }

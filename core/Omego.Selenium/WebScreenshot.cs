@@ -1,11 +1,11 @@
-using OpenQA.Selenium;
-
 namespace Omego.Selenium
 {
     using System;
     using System.Drawing;
     using System.IO;
     using System.IO.Abstractions;
+
+    using OpenQA.Selenium;
 
     public class WebScreenshot
     {

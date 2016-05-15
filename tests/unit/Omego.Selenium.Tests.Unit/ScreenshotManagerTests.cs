@@ -2,14 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Drawing.Imaging;
 
     using FluentAssertions;
 
     using NSubstitute;
-
-    using Omego.Selenium.Extensions;
-    using Omego.Selenium.Tests.Unit.Extensions;
 
     using OpenQA.Selenium;
 
@@ -17,20 +13,6 @@
 
     public class ScreenshotManagerTests
     {
-        [Fact]
-        public void GetScreenshotShouldReturnScreenshot()
-        {
-            var driver = Substitute.For<IMockWebDriver>();
-            driver.GetScreenshot().Returns(new Screenshot("test"));
-
-            var manager = GetScreenshotManager(driver);
-
-            var screenshot = manager.GetScreenshot(500);
-
-            screenshot.Should().NotBeNull();
-            screenshot.AsByteArray.ShouldBeEquivalentTo(new byte[] { 181, 235, 45 });
-        }
-
         [CLSCompliant(false)]
         [Theory]
         [MemberData(nameof(ScreenshotManagerTestData.SaveScreenshotAsShouldThrowExceptionWhenTimeLimitIsReachedCases),
@@ -76,7 +58,6 @@
             return new ScreenshotManager(driver);
         }
 
-
         public interface IMockWebDriver : IWebDriver, ITakesScreenshot
         {
         }
@@ -84,7 +65,7 @@
         private static class ScreenshotManagerTestData
         {
             public static IEnumerable<object[]> SaveScreenshotAsShouldThrowExceptionWhenTimeLimitIsReachedCases
-                => new List<object[]> { new object[] { new Screenshot(String.Empty) }, new object[] { (Screenshot)null } };
+                => new List<object[]> { new object[] { new Screenshot(string.Empty) }, new object[] { null } };
 
             public static IEnumerable<object[]>
                 ConstructorShouldThrowArgumentExceptionWhenRequiredArgumentsNotValidCases
@@ -97,6 +78,20 @@
                                     typeof(ArgumentNullException)
                                 }
                         };
+        }
+
+        [Fact]
+        public void GetScreenshotShouldReturnScreenshot()
+        {
+            var driver = Substitute.For<IMockWebDriver>();
+            driver.GetScreenshot().Returns(new Screenshot("test"));
+
+            var manager = GetScreenshotManager(driver);
+
+            var screenshot = manager.GetScreenshot(500);
+
+            screenshot.Should().NotBeNull();
+            screenshot.AsByteArray.ShouldBeEquivalentTo(new byte[] { 181, 235, 45 });
         }
     }
 }

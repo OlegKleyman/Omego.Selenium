@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Drawing.Imaging;
     using System.IO;
 
     using OpenQA.Selenium;
@@ -25,7 +24,8 @@
             {
                 screenshot = driver.TakeScreenshot();
             }
-            while (stopWatch.ElapsedMilliseconds < timeLimit && screenshot?.AsByteArray?.Length == invalidScreenshotLength);
+            while (stopWatch.ElapsedMilliseconds < timeLimit
+                   && screenshot?.AsByteArray?.Length == invalidScreenshotLength);
 
             stopWatch.Stop();
 

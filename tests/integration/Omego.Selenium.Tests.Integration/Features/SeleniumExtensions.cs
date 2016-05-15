@@ -19,8 +19,7 @@
         [Background]
         public void Background()
         {
-            "Given I have an IWebDriver object"._(() => driver = new FirefoxDriver())
-                .Teardown(() => driver.Dispose());
+            "Given I have an IWebDriver object"._(() => driver = new FirefoxDriver()).Teardown(() => driver.Dispose());
 
             "And it's full screen"._(() => this.driver.Manage().Window.Maximize());
         }
