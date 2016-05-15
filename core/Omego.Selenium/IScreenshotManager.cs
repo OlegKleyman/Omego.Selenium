@@ -4,6 +4,6 @@ namespace Omego.Selenium
 
     public interface IScreenshotManager
     {
-        WebScreenshot GetScreenshot();
+        WebScreenshot GetScreenshot(int timeLimit);
     }
 }
