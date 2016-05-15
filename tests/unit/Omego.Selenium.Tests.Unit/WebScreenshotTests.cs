@@ -2,8 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing.Imaging;
+    using System.IO.Abstractions.TestingHelpers;
 
     using FluentAssertions;
+
+    using NSubstitute;
 
     using OpenQA.Selenium;
 
@@ -31,6 +35,23 @@
                     "the parameter name should be of the problematic parameter")
                 .And.Should()
                 .BeOfType(expectedException);
+        }
+
+        [Fact]
+        public void SaveToShouldSaveToTheFileSystem()
+        {
+            var screenshot =
+                new WebScreenshot(
+                    new Screenshot(
+                        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAIAAADAusJtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8Y"
+                        + "QUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAAQSURBVBhXY/j//z8C//8PAF+wC/WcqJPUAAAAAElFTkSuQmCC"));
+
+            var fileSystem = new MockFileSystem();
+            var imageTarget = new ImageTarget("test", "test.bmp", ImageFormat.Bmp);
+
+            screenshot.SaveTo(fileSystem, imageTarget);
+
+            fileSystem.File.Exists(imageTarget.CombinedPath).Should().BeTrue();
         }
 
         public static class WebScreenshotTestData

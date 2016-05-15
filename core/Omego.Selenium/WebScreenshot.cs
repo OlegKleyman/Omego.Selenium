@@ -3,6 +3,9 @@ using OpenQA.Selenium;
 namespace Omego.Selenium
 {
     using System;
+    using System.Drawing;
+    using System.IO;
+    using System.IO.Abstractions;
 
     public class WebScreenshot
     {
@@ -16,5 +19,18 @@ namespace Omego.Selenium
         }
 
         public byte[] AsByteArray => screenshot.AsByteArray;
+
+        [CLSCompliant(false)]
+        public FileInfoBase SaveTo(IFileSystem fileSystem, ImageTarget target)
+        {
+            using (var imageStream = new MemoryStream(screenshot.AsByteArray))
+            {
+                var screenshotImage = Image.FromStream(imageStream);
+                
+                screenshotImage.Save(fileSystem.File.Create(target.CombinedPath), target.Format);
+            }
+
+            return fileSystem.FileInfo.FromFileName(target.CombinedPath);
+        }
     }
 }
