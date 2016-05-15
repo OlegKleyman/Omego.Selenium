@@ -12,7 +12,7 @@
 
     using Xbehave;
 
-    public class SeleniumExtensions
+    public class Selenium
     {
         private IWebDriver driver;
 
