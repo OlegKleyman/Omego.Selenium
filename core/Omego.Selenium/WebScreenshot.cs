@@ -8,16 +8,16 @@ namespace Omego.Selenium
     using OpenQA.Selenium;
 
     /// <summary>
-    /// Represents a web screenshot.
+    ///     Represents a web screenshot.
     /// </summary>
     public class WebScreenshot
     {
         private readonly Screenshot screenshot;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebScreenshot"/> class.
+        ///     Initializes a new instance of the <see cref="WebScreenshot" /> class.
         /// </summary>
-        /// <param name="screenshot">The <see cref="Screenshot"/> to use as a template.</param>
+        /// <param name="screenshot">The <see cref="Screenshot" /> to use as a template.</param>
         public WebScreenshot(Screenshot screenshot)
         {
             if (screenshot == null) throw new ArgumentNullException(nameof(screenshot));
@@ -26,17 +26,17 @@ namespace Omego.Selenium
         }
 
         /// <summary>
-        /// Gets <see cref="AsByteArray"/>.
+        ///     Gets <see cref="AsByteArray" />.
         /// </summary>
         /// <value>The byte array representation of the current object.</value>
         public byte[] AsByteArray => screenshot.AsByteArray;
 
         /// <summary>
-        /// Saves the current object to the <see cref="IFileSystem"/> object.
+        ///     Saves the current object to the <see cref="IFileSystem" /> object.
         /// </summary>
-        /// <param name="fileSystem">The <see cref="IFileSystem"/> object to use for operations.</param>
-        /// <param name="target">The <see cref="ImageTarget"/> to use when saving this object.</param>
-        /// <returns>A <see cref="FileInfoBase"/> object representing the create screenshot file.</returns>
+        /// <param name="fileSystem">The <see cref="IFileSystem" /> object to use for operations.</param>
+        /// <param name="target">The <see cref="ImageTarget" /> to use when saving this object.</param>
+        /// <returns>A <see cref="FileInfoBase" /> object representing the create screenshot file.</returns>
         [CLSCompliant(false)]
         public FileInfoBase SaveTo(IFileSystem fileSystem, ImageTarget target)
         {
